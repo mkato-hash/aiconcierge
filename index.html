@@ -162,8 +162,8 @@
         }
 
         .benefit-card .icon {
-            font-size: 40px;
-            margin-bottom: 15px;
+            font-size: 64px;
+            margin-bottom: 20px;
         }
 
         .benefit-card h3 {
@@ -749,9 +749,18 @@
             <div class="logo">
                 <img src="images/logo.png" alt="AIコンシェルジュロゴ" style="height: 85px; width: auto;">
             </div>
-            <button class="contact-btn" onclick="document.querySelector('.footer-info').scrollIntoView({behavior: 'smooth'})">
-                お問い合わせ
-            </button>
+            <div style="display: flex; gap: 30px; align-items: center;">
+                <div style="text-align: right; font-size: 13px; line-height: 1.6;">
+                    <div style="color: #666;">お電話でのご連絡</div>
+                    <a href="tel:0368244533" style="font-size: 16px; font-weight: bold; color: #333; text-decoration: none; transition: all 0.3s ease; display: block;" onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#333'">
+                        03-6824-4533
+                    </a>
+                    <div style="color: #666; font-size: 12px;">平日9：00−18：00</div>
+                </div>
+                <button class="contact-btn" onclick="document.querySelector('.footer-info').scrollIntoView({behavior: 'smooth'})">
+                    お問い合わせ
+                </button>
+            </div>
         </div>
     </header>
 
@@ -798,9 +807,8 @@
                 </div>
             </div>
 
-            <div class="impact-box">
-                <h3>年間<span style="font-size: 48px; color: white;">200時間</span>以上削減！</h3>
-                <p>※当社導入事例の平均値</p>
+            <div style="text-align: center; margin: 60px 0;">
+                <img src="images/image001.png" alt="AIメリット画像" style="max-width: 100%; height: auto; max-width: 800px; border-radius: 8px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);">
             </div>
         </div>
     </section>
@@ -895,6 +903,11 @@
                     </p>
                     <div class="reduction-rate">削減率 約80%</div>
                 </div>
+            </div>
+
+            <div class="impact-box" style="margin-top: 60px;">
+                <h3>年間<span style="font-size: 48px; color: white;">200時間</span>以上削減！</h3>
+                <p>※当社導入事例の平均値</p>
             </div>
         </div>
     </section>
