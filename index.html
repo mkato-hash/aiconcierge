@@ -752,13 +752,20 @@
         }
 
         @media (max-width: 480px) {
+            .header-container {
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 5px;
+            }
+
             .logo img {
-                height: 50px !important;
+                height: 40px !important;
             }
 
             .header-container > div:last-child {
-                gap: 10px;
+                gap: 8px;
                 align-items: center;
+                display: flex;
             }
 
             .phone-info {
@@ -767,7 +774,9 @@
 
             .phone-icon-btn {
                 display: inline-block !important;
+                font-size: 20px;
                 transition: all 0.3s ease;
+                cursor: pointer;
             }
 
             .phone-icon-btn:hover {
@@ -780,11 +789,15 @@
 
             .contact-btn-icon {
                 display: inline-block !important;
+                padding: 8px 10px !important;
+                font-size: 14px;
+                min-width: auto !important;
             }
 
             .contact-btn {
-                padding: 10px 20px;
+                padding: 10px 15px;
                 font-size: 14px;
+                width: auto;
             }
 
             .hero-content h2 {
