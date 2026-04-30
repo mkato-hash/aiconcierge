@@ -1,7 +1,1226 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    TEST PLACEHOLDER
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIコンシェルジュ - 経営者のためのAI体験プログラム</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'ヒラギノサンス', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: white;
+        }
+
+        /* ============ ヘッダー ============ */
+        header {
+            background: white;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 5px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 1px;
+        }
+
+        .logo .gold {
+            color: #d4af37;
+        }
+
+        .contact-btn {
+            background: #d4af37;
+            color: #333;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Hiragino Sans', sans-serif;
+        }
+
+        .phone-icon-btn {
+            display: none;
+        }
+
+        .contact-btn-icon {
+            display: none;
+        }
+
+        .contact-btn:hover {
+            background: #e8c547;
+            transform: translateY(-2px);
+        }
+
+        /* ============ コンテナ ============ */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============ トップセクション（表） ============ */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 750px;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/top.jpeg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .hero-content h2 {
+            font-size: 46px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 12px;
+            line-height: 1.1;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);
+            letter-spacing: 1px;
+        }
+
+        .hero-content h2 .gold {
+            color: #d4af37;
+        }
+
+        .hero-content .tagline {
+            font-size: 26px;
+            color: #d4af37;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 14px;
+            color: white;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ============ メリットセクション ============ */
+        .benefits {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .benefits h2 {
+            font-size: 44px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .benefits h2 .gold {
+            color: #d4af37;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-top: 4px solid #d4af37;
+        }
+
+        .benefit-card .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .benefit-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .impact-box {
+            background: linear-gradient(135deg, #d4af37 0%, #e8c547 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .impact-box h3 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .impact-box p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ============ スペーサー & セクション区切り ============ */
+        .divider {
+            height: 1px;
+            background: #e0e0e0;
+            margin: 80px 0;
+        }
+
+        /* ============ AIをわかりやすく ============ */
+        .ai-intro {
+            padding: 80px 20px;
+            background: #fafafa;
+        }
+
+        .ai-intro h2 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .ai-intro h2 .gold {
+            color: #d4af37;
+        }
+
+        .problem-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .problem-card .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .problem-card h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .problem-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ============ AI活用事例 ============ */
+        .use-cases {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .use-cases h2 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .use-cases h2 .gold {
+            color: #d4af37;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .case-item {
+            background: #f9f9f9;
+            padding: 40px 30px;
+            border-radius: 8px;
+            border-top: 4px solid #d4af37;
+        }
+
+        .case-item h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .case-item p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .reduction-rate {
+            background: #333;
+            color: #d4af37;
+            padding: 12px 16px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .improvement-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            position: relative;
+            height: 60px;
+        }
+
+        .improvement-arrow::before {
+            content: '↓';
+            font-size: 48px;
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .improvement-arrow .text {
+            position: absolute;
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            background: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            letter-spacing: 1px;
+        }
+
+        /* ============ フロー図 ============ */
+        .process {
+            padding: 80px 20px;
+            background: #fafafa;
+        }
+
+        .process h2 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .process h2 .gold {
+            color: #d4af37;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .step .number {
+            font-size: 36px;
+            color: #d4af37;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .step p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .step::after {
+            content: '→';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: #d4af37;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        /* ============ 料金プラン ============ */
+        .pricing {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .pricing h2 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 60px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .pricing h2 .gold {
+            color: #d4af37;
+        }
+
+        .pricing-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .plan-card {
+            background: #f9f9f9;
+            border-left: 4px solid #d4af37;
+            padding: 40px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .plan-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .plan-card h3 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .plan-card .subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .plan-card p {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .price {
+            font-size: 36px;
+            color: #d4af37;
+            font-weight: bold;
+            margin: 30px 0;
+        }
+
+        .price-currency {
+            font-size: 20px;
+        }
+
+        .price-note {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .pricing-image {
+            text-align: center;
+        }
+
+        .pricing-image img {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ============ FAQ ============ */
+        .faq {
+            padding: 80px 20px;
+            background: #fafafa;
+        }
+
+        .faq h2 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .faq h2 .gold {
+            color: #d4af37;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .faq-question {
+            background: #f0f0f0;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #e8e8e8;
+        }
+
+        .faq-question h3 {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .faq-toggle {
+            font-size: 20px;
+            color: #d4af37;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* ============ フッター ============ */
+        .footer-content {
+            padding: 80px 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .footer-text h2 {
+            font-size: 40px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-text p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .footer-image {
+            text-align: center;
+        }
+
+        .footer-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .footer-info {
+            background: #333;
+            color: white;
+            padding: 50px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .company-info {
+            margin-bottom: 30px;
+        }
+
+        .company-info h3 {
+            font-size: 20px;
+            color: #d4af37;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .company-info p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .contact-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-links a {
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            color: #999;
+            font-size: 12px;
+        }
+
+        /* ============ レスポンシブ ============ */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .header-container > div:last-child {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .contact-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-content h2 {
+                font-size: 32px;
+            }
+
+            .hero-content .tagline {
+                font-size: 22px;
+            }
+
+            .hero {
+                height: 600px;
+            }
+
+            .hero > div:last-child {
+                position: static;
+                margin-top: 30px;
+                text-align: center;
+            }
+
+            .hero > div:last-child img {
+                height: 150px !important;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .step::after {
+                content: '↓';
+                right: 50%;
+                transform: translateX(50%);
+                bottom: -30px;
+                top: auto;
+            }
+
+            .step:last-child::after {
+                display: none;
+            }
+
+            .footer-main,
+            .pricing-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .problem-cards,
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h2 {
+                font-size: 28px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 8px 0;
+            }
+
+            .header-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 15px;
+                padding: 0 15px;
+                flex-wrap: nowrap;
+            }
+
+            .logo {
+                flex-shrink: 0;
+            }
+
+            .logo img {
+                height: 35px !important;
+                width: auto;
+            }
+
+            .header-container > div:last-child {
+                display: none !important;
+            }
+
+            .phone-info {
+                display: none !important;
+            }
+
+            .phone-icon-btn {
+                display: inline-flex !important;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                color: #333;
+                padding: 0 !important;
+                border: none !important;
+                background: none !important;
+                flex-shrink: 0;
+                margin-left: auto !important;
+                margin-right: 15px !important;
+            }
+
+            .phone-icon-btn svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .phone-icon-btn:hover {
+                color: #d4af37;
+            }
+
+            .contact-btn-text {
+                display: none !important;
+            }
+
+            .contact-btn-icon {
+                display: inline-flex !important;
+                align-items: center;
+                justify-content: center;
+                padding: 0 !important;
+                border: none !important;
+                background: none !important;
+                cursor: pointer;
+                color: #333;
+                transition: all 0.3s ease;
+                flex-shrink: 0;
+                margin: 0 !important;
+            }
+
+            .contact-btn-icon svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .contact-btn-icon:hover {
+                color: #d4af37;
+            }
+
+            .contact-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+                width: auto;
+            }
+
+            .hero-content h2 {
+                font-size: 24px;
+            }
+
+            .hero-content .tagline {
+                font-size: 18px;
+            }
+
+            .hero {
+                height: 500px;
+            }
+
+            .hero > div:last-child {
+                position: static !important;
+                margin-top: 20px;
+            }
+
+            .hero > div:last-child img {
+                height: 100px !important;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
-<body>TEST</body>
+<body>
+    <!-- ============ ヘッダー ============ -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="AIコンシェルジュロゴ" style="height: 85px; width: auto;">
+            </div>
+            <a href="tel:0368244533" class="phone-icon-btn" style="text-decoration: none; cursor: pointer;" title="電話をかける">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+            </a>
+            <button class="contact-btn contact-btn-icon" style="background: none; border: none; padding: 0; cursor: pointer; color: #333;" onclick="document.querySelector('.footer-info').scrollIntoView({behavior: 'smooth'})" title="お問い合わせ">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="m22 7-10 5L2 7"></path>
+                </svg>
+            </button>
+            <div style="display: flex; gap: 30px; align-items: center;">
+                <div class="phone-info" style="text-align: right; font-size: 13px; line-height: 1.6;">
+                    <div style="color: #666;">お電話でのご連絡</div>
+                    <a href="tel:0368244533" style="font-size: 16px; font-weight: bold; color: #333; text-decoration: none; transition: all 0.3s ease; display: block;" onmouseover="[this.style](http://this.style).color='#d4af37'" onmouseout="[this.style](http://this.style).color='#333'">
+                        03-6824-4533
+                    </a>
+                    <div style="color: #666; font-size: 12px;">平日9：00−18：00</div>
+                </div>
+                <button class="contact-btn contact-btn-text" onclick="document.querySelector('.footer-info').scrollIntoView({behavior: 'smooth'})">
+                    お問い合わせ
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============ トップセクション ============ -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>経営者の皆さん、<br><span class="gold">AIを体験</span>してみませんか？</h2>
+            <p class="tagline">AIコンシェルジュ</p>
+            <p>
+                AIは便利だと知っているけど、実際にどう使ったら良いのか、本当に役に立つのか、そんなお悩みを解決します。<br><br>
+                まずはAIを実際に体験していただく。その場でAIが日々のお仕事をどう効率化できるか、一緒に探っていきます。
+            </p>
+        </div>
+        <div style="position: absolute; bottom: 40px; right: 40px; z-index: 3;">
+            <img src="images/logo3.png" alt="AIコンシェルジュロゴ3" style="height: 250px; width: auto;">
+        </div>
+    </section>
+
+    <!-- ============ メリットセクション ============ -->
+    <section class="benefits">
+        <div class="container">
+            <h2>AIコンシェルジュの<span class="gold">4つのメリット</span></h2>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon">⏰</div>
+                    <h3>時間が生まれる</h3>
+                    <p>業務時間を削減的に短縮し、戦略的な業務に時間を使える</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">✓</div>
+                    <h3>ミスが減る</h3>
+                    <p>AIによる正確な処理でヒューマンエラーを最小化</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">⚡</div>
+                    <h3>仕事が早くなる</h3>
+                    <p>自動化により業務スピードが飛躍的に向上</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">💰</div>
+                    <h3>コストを削減</h3>
+                    <p>運用コスト削減で経営効率が大幅改善</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 60px 0 0 0;">
+                <img src="images/image001.png" alt="AIメリット画像" style="width: 100%; max-width: 600px; height: auto;">
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ============ AIをわかりやすく ============ -->
+    <section class="ai-intro">
+        <div class="container">
+            <h2><span class="gold">わかりにくい「AI」</span>をわかりやすく</h2>
+
+            <div class="problem-cards">
+                <div class="problem-card">
+                    <div class="icon">❓</div>
+                    <h3>AIって何？</h3>
+                    <p>難しい概念ではなく、実は日々の業務で活用できる身近な存在です</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">🤔</div>
+                    <h3>本当に役に立つ？</h3>
+                    <p>実際の業務を通じて、AIの実用性を確認できます</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">🛠️</div>
+                    <h3>どう使ったら？</h3>
+                    <p>専門知識なくても、その場でAIの活用方法を習得できます</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">💼</div>
+                    <h3>業種は関係？</h3>
+                    <p>どの業種でも、経営業務の効率化に活用できます</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ AI活用事例 ============ -->
+    <section class="use-cases">
+        <div class="container">
+            <h2>こんなお仕事も<span class="gold">AIで効率化</span>できます</h2>
+
+            <div class="cases-grid">
+                <div class="case-item">
+                    <h3>メールの仕訳・返信</h3>
+                    <p style="margin-bottom: 20px; color: #999; font-size: 13px;">
+                        <strong style="color: #333;">現在：</strong>毎日大量のメールを仕分けて、返信内容を考えて送らなくてはいけない
+                    </p>
+                    <div class="improvement-arrow">
+                        <span class="text">AI改善</span>
+                    </div>
+                    <p style="margin-bottom: 20px; font-size: 14px;">
+                        重要なメールの仕訳、返信内容の作成など、定型的なメール対応をAIが自動化します
+                    </p>
+                    <div class="reduction-rate">削減率 約80%</div>
+                </div>
+                <div class="case-item">
+                    <h3>スケジュール調整</h3>
+                    <p style="margin-bottom: 20px; color: #999; font-size: 13px;">
+                        <strong style="color: #333;">現在：</strong>スケジューラで空いている日程を確認し先方に打診、決定したスケジュールを登録する手間が大変
+                    </p>
+                    <div class="improvement-arrow">
+                        <span class="text">AI改善</span>
+                    </div>
+                    <p style="margin-bottom: 20px; font-size: 14px;">
+                        会議の日程調整、参加者との連絡をAIが一括対応。ダブルブッキングも防げます
+                    </p>
+                    <div class="reduction-rate">削減率 約70%</div>
+                </div>
+                <div class="case-item">
+                    <h3>エクセル計算・分析</h3>
+                    <p style="margin-bottom: 20px; color: #999; font-size: 13px;">
+                        <strong style="color: #333;">現在：</strong>各部門の売上、実績などを分析したりエクセルの操作が面倒、統計情報などを探すのも大変
+                    </p>
+                    <div class="improvement-arrow">
+                        <span class="text">AI改善</span>
+                    </div>
+                    <p style="margin-bottom: 20px; font-size: 14px;">
+                        エクセルの複雑な計算や集計もおまかせ、グラフ作成もAIが瞬時に処理。経営判断が迅速に
+                    </p>
+                    <div class="reduction-rate">削減率 約75%</div>
+                </div>
+                <div class="case-item">
+                    <h3>領収書の精算</h3>
+                    <p style="margin-bottom: 20px; color: #999; font-size: 13px;">
+                        <strong style="color: #333;">現在：</strong>領収書の内容を経費精算ツールに入力するのが手間、請求書もリストにするにはツールが必要だと思ってる
+                    </p>
+                    <div class="improvement-arrow">
+                        <span class="text">AI改善</span>
+                    </div>
+                    <p style="margin-bottom: 20px; font-size: 14px;">
+                        毎月の領収書のデータ読み込みから仕訳も可能、請求書の整理の手間を大幅削減
+                    </p>
+                    <div class="reduction-rate">削減率 約80%</div>
+                </div>
+            </div>
+
+            <div class="impact-box" style="margin-top: 60px;">
+                <h3>年間<span style="font-size: 48px; color: white;">200時間</span>以上削減！</h3>
+                <p>※当社導入事例の平均値</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ============ フロー図 ============ -->
+    <section class="process">
+        <div class="container">
+            <h2><span class="gold">ヒアリングから改善まで</span>の流れ</h2>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="number">1</div>
+                    <h3>ヒアリング</h3>
+                    <p>日々のお仕事の課題をお聞きします</p>
+                </div>
+                <div class="step">
+                    <div class="number">2</div>
+                    <h3>課題抽出</h3>
+                    <p>どこをAIで効率化できるかを分析</p>
+                </div>
+                <div class="step">
+                    <div class="number">3</div>
+                    <h3>その場で実践</h3>
+                    <p>実際にAIを使ってみます</p>
+                </div>
+                <div class="step">
+                    <div class="number">4</div>
+                    <h3>定着支援</h3>
+                    <p>継続的なサポートで実務に定着させます</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ============ 料金プラン ============ -->
+    <section class="pricing">
+        <div class="container">
+            <h2><span class="gold">料金プラン</span></h2>
+
+            <div class="pricing-content">
+                <div>
+                    <div class="plan-card">
+                        <h3>AIコンシェルジュ</h3>
+                        <p class="subtitle">AI体験プログラム</p>
+                        <p>
+                            日々のお仕事をヒアリングしながら、その場でAIで効率化。<br>
+                            まずはAIを体験いただくプラン
+                        </p>
+                        <div class="price">¥<span class="price-currency">100,000</span></div>
+                        <p class="price-note">（税別）</p>
+                        <p style="color: #666; font-size: 14px;">
+                            ご質問・ご不明な点がございましたら、お気軽にお問い合わせください。
+                        </p>
+                    </div>
+                </div>
+                <div class="pricing-image">
+                    <img src="images/pic01.png" alt="AIコンシェルジュの詳細">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq">
+        <div class="container">
+            <h2>よくあるご<span class="gold">質問</span></h2>
+
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>Q. AIやITに詳しくなくても大丈夫ですか?</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        はい。むしろITに馴染みのない経営者の方こそ対象です。専門用語は使わず、実業務を通じてAIの使いどころを理解していただけます。
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>Q. 業種や会社規模に制限はありますか?</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        特にございません。中小企業から上場企業まで、経営者の方であればAIを体験いただけます。
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>Q. 機密情報の扱いが不安です。</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        ヒアリング内容や業務情報は厳重に管理いたします。必要に応じて秘密保持契約(NDA)の締結も可能です。
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>Q. どのように始めたらよいですか?</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        まずはお気軽にお問い合わせください。担当者がサービスの詳細をご説明し、最適なプランをご提案させていただきます。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ フッター ============ -->
+    <section class="footer-content">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-text">
+                    <h2><span style="color: #d4af37;">経営に集中</span>できる毎日へ</h2>
+                    <p>AIコンシェルジュは、経営者の皆さんの日々の業務をAIでサポートし、本来の経営業務に集中していただくためのサービスです。</p>
+                    <p>複雑に見えるAIも、実際に体験してみると、意外とシンプルで身近な存在。その体験からスタートしましょう。</p>
+                </div>
+                <div class="footer-image">
+                    <img src="images/footer.jpeg" alt="フッター画像">
+                </div>
+            </div>
+
+            <div class="footer-info">
+                <div class="company-info">
+                    <h3>株式会社アグリード</h3>
+                    <p>〒101-0044 東京都千代田区鍛冶町2-10-11 イマジクスビル8F</p>
+                </div>
+
+                <div class="company-info">
+                    <h3>お問い合わせ</h3>
+                    <div class="contact-links">
+                        <div>
+                            <strong>TEL:</strong> <a href="tel:0368244533">03-6824-4533</a>
+                        </div>
+                        <div>
+                            <strong>FAX:</strong> <a href="#">03-6634-5598</a>
+                        </div>
+                        <div>
+                            <strong>MAIL:</strong> <a href="mailto:info@aglead.co.jp">info@aglead.co.jp</a>
+                        </div>
+                        <div>
+                            <strong>URL:</strong> <a href="https://aglead.co.jp" target="_blank">https://aglead.co.jp</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copyright">
+                    <p>&copy; 2026 AGLEAD INC. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+    </script>
+</body>
 </html>
