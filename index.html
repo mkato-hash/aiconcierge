@@ -1029,7 +1029,52 @@
             background: linear-gradient(135deg, #e8c547 0%, #f5d55a 100%);
         }
 
+        /* ============ 締めセクション ============ */
+        .closing-section {
+            padding: 80px 20px;
+            background: white;
+            border-top: 2px solid #d4af37;
+        }
+
         /* ============ フッター ============ */
+        .site-footer {
+            background: #1a1008;
+            padding: 50px 20px 30px;
+        }
+
+        .site-footer .footer-info {
+            background: transparent;
+            border: none;
+            padding: 0;
+            margin-bottom: 0;
+        }
+
+        .site-footer .company-info h3 {
+            color: #d4af37;
+        }
+
+        .site-footer .company-info p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .site-footer .contact-links div {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .site-footer .contact-links a {
+            color: white;
+        }
+
+        .site-footer .contact-links a:hover {
+            color: #d4af37;
+        }
+
+        .site-footer .copyright {
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* 旧 .footer-content は廃止 */
         .footer-content {
             padding: 80px 20px;
             background: white;
@@ -1891,8 +1936,8 @@
         </div>
     </section>
 
-    <!-- ============ フッター ============ -->
-    <section class="footer-content">
+    <!-- ============ 締めセクション ============ -->
+    <section class="closing-section">
         <div class="container">
             <div class="footer-main">
                 <div class="footer-text">
@@ -1904,7 +1949,12 @@
                     <img src="images/footer.jpeg" alt="フッター画像">
                 </div>
             </div>
+        </div>
+    </section>
 
+    <!-- ============ フッター ============ -->
+    <footer class="site-footer">
+        <div class="container">
             <div class="footer-info">
                 <div class="company-info">
                     <h3>株式会社アグリード</h3>
@@ -1928,7 +1978,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </footer>
 
     <script>
         function toggleFaq(element) {
