@@ -956,6 +956,79 @@
             display: block;
         }
 
+        /* ============ CTA ============ */
+        .cta-section {
+            background: linear-gradient(135deg, #1a1008 0%, #2d1e00 50%, #1a1008 100%);
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.12) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .cta-inner {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-label {
+            font-size: 12px;
+            letter-spacing: 0.4em;
+            color: rgba(212, 175, 55, 0.7);
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .cta-heading {
+            font-size: 64px;
+            font-weight: bold;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 28px;
+            letter-spacing: 2px;
+        }
+
+        .cta-heading span {
+            color: #d4af37;
+        }
+
+        .cta-sub {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.9;
+            margin-bottom: 50px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37 0%, #e8c547 100%);
+            color: #1a1008;
+            padding: 22px 64px;
+            border-radius: 4px;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(212, 175, 55, 0.6);
+            background: linear-gradient(135deg, #e8c547 0%, #f5d55a 100%);
+        }
+
         /* ============ フッター ============ */
         .footer-content {
             padding: 80px 20px;
@@ -1800,6 +1873,20 @@
                         まずはお気軽にお問い合わせください。担当者がサービスの詳細をご説明し、最適なプランをご提案させていただきます。
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-inner">
+                <p class="cta-label">CONTACT</p>
+                <h2 class="cta-heading">まずは、<span>無料相談</span>から。</h2>
+                <p class="cta-sub">AIの活用方法を実際に体験しながら、あなたのビジネスに合った最適な使い方を一緒に見つけます。</p>
+                <button class="cta-btn" onclick="document.querySelector('.footer-info').scrollIntoView({behavior:'smooth'})">
+                    無料相談のお問い合わせ →
+                </button>
             </div>
         </div>
     </section>
