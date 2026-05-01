@@ -177,8 +177,9 @@
 
         .benefit-card .icon {
             width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #1a1008 0%, #2d1e00 100%);
+            height: 160px;
+            background: linear-gradient(135deg, #fdf9f0 0%, #fef5d9 100%);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -209,12 +210,7 @@
         }
 
         .benefit-card .icon-text {
-            font-size: 32px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #d4af37 0%, #f5e090 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 56px;
         }
 
         .impact-box {
@@ -509,7 +505,7 @@
         /* ============ AIをわかりやすく ============ */
         .ai-intro {
             padding: 80px 20px;
-            background: #fafafa;
+            background: white;
         }
 
         .ai-intro h2 {
@@ -667,7 +663,7 @@
         /* ============ フロー図 ============ */
         .process {
             padding: 80px 20px;
-            background: #fafafa;
+            background: #fdf9f0;
         }
 
         .process h2 {
@@ -747,30 +743,16 @@
         /* ============ 料金プラン ============ */
         .pricing {
             padding: 80px 20px;
-            background: linear-gradient(135deg, #0f0a05 0%, #1a1008 100%);
-            position: relative;
-        }
-
-        .pricing::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
-            pointer-events: none;
+            background: white;
         }
 
         .pricing h2 {
             font-size: 48px;
             font-weight: bold;
-            color: white;
+            color: #1a1008;
             margin-bottom: 60px;
             text-align: center;
             letter-spacing: 1px;
-            position: relative;
-            z-index: 2;
         }
 
         .pricing h2 .gold {
@@ -782,23 +764,20 @@
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
-            position: relative;
-            z-index: 2;
         }
 
         .plan-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: white;
             border: 2px solid #d4af37;
             padding: 50px 40px;
             border-radius: 12px;
             transition: all 0.4s ease;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
         }
 
         .plan-card:hover {
-            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.3);
-            transform: translateY(-8px);
-            background: white;
+            box-shadow: 0 16px 48px rgba(212, 175, 55, 0.25);
+            transform: translateY(-6px);
         }
 
         .plan-card h3 {
@@ -825,12 +804,16 @@
 
         .price {
             font-size: 48px;
-            background: linear-gradient(135deg, #d4af37 0%, #f5e090 100%);
+            color: #1a1008;
+            font-weight: bold;
+            margin: 40px 0 15px 0;
+        }
+
+        .price span.gold-accent {
+            background: linear-gradient(135deg, #d4af37 0%, #b8960b 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: bold;
-            margin: 40px 0 15px 0;
         }
 
         .price-currency {
@@ -943,7 +926,7 @@
         /* ============ フッター ============ */
         .footer-content {
             padding: 80px 20px;
-            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            background: white;
             border-top: 2px solid #d4af37;
         }
 
@@ -987,10 +970,10 @@
         }
 
         .footer-info {
-            background: #333;
-            color: white;
+            background: #fdf9f0;
+            border: 1px solid rgba(212, 175, 55, 0.3);
             padding: 50px;
-            border-radius: 8px;
+            border-radius: 12px;
             margin-bottom: 40px;
         }
 
@@ -1007,31 +990,38 @@
 
         .company-info p {
             font-size: 14px;
+            color: #444;
             line-height: 1.8;
             margin-bottom: 8px;
         }
 
         .contact-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-links div {
+            font-size: 14px;
+            color: #444;
         }
 
         .contact-links a {
-            color: #d4af37;
+            color: #1a1008;
             text-decoration: none;
             font-size: 14px;
             transition: all 0.3s ease;
+            font-weight: 600;
         }
 
         .contact-links a:hover {
-            text-decoration: underline;
+            color: #d4af37;
         }
 
         .copyright {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.2);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
             color: #999;
             font-size: 12px;
         }
@@ -1699,12 +1689,6 @@
                     <div class="contact-links">
                         <div>
                             <strong>TEL:</strong> <a href="tel:0368244533">03-6824-4533</a>
-                        </div>
-                        <div>
-                            <strong>FAX:</strong> <a href="#">03-6634-5598</a>
-                        </div>
-                        <div>
-                            <strong>MAIL:</strong> <a href="mailto:info@aglead.co.jp">info@aglead.co.jp</a>
                         </div>
                         <div>
                             <strong>URL:</strong> <a href="https://aglead.co.jp" target="_blank">https://aglead.co.jp</a>
